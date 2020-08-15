@@ -1,0 +1,22 @@
+<mat-drawer-container class="example-container" autosize>
+    <mat-drawer #drawer class="example-sidenav" mode="side">
+        <mat-list>
+          <mat-list-item><h1>consultoriacar.com</h1></mat-list-item>
+            <mat-list-item><a href="/main/dashboard" class="item">Principal</a></mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item><a href="/main/dashboard" class="item">Agregar Admin</a></mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item><a href="/main/dashboard" class="item">Salir</a></mat-list-item>
+          </mat-list>
+    </mat-drawer>
+  
+    <div class="example-sidenav-content">
+      <button type="button" class="menuAction" mat-button (click)="drawer.toggle()">
+        <mat-icon aria-hidden="false" aria-label="Example home icon">menu</mat-icon>
+      </button>
+      <div class="container">
+        <router-outlet></router-outlet>
+    </div>
+    </div>
+  
+  </mat-drawer-container>
