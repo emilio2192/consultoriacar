@@ -5,7 +5,7 @@
     "outDir": "./out-tsc/app",
     "allowJs": true,
     "experimentalDecorators": true,
-    "enableIvy": false,
+    
     "types": []
   },
   "files": [
@@ -15,5 +15,7 @@
   "include": [
     "src/**/*.d.ts"
   ],
-  "enableIvy": false
+  "angularCompilerOptions": {
+    "enableIvy": false
+  }
 }

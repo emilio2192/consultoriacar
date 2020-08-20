@@ -22,13 +22,14 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.login()
+    // this.login()
   }
 
   login = async () => {
     console.log(window.localStorage.getItem("auth"));
     if (window.localStorage.getItem("auth") != null) {
-      window.location.href = `//${window.location.host}/main`;
+      // window.location.href = `//${window.location.host}/main/dashboard`;
+      this.router.navigate(['main/dashboard']);
       return;
     } else {
       const response = await this.firebase.login(this.email, this.password);
@@ -36,7 +37,7 @@ export class LoginComponent implements OnInit {
         window.localStorage.setItem("auth", JSON.stringify(response));
         this.loginRequest = response.message;
         console.log('INGRESASTE', response)
-        // window.location.href = `//${window.location.host}/main`;
+        this.router.navigate(['main/dashboard']);
       }
     }
   }

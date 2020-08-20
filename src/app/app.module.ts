@@ -7,11 +7,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './auth/login/login.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { environment } from '../environments/environment';
 
 import { AngularFireModule } from '@angular/fire';
-import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+
 import { FirebaseService } from './services/firebase.service';
 import { MainComponent } from './main/main.component';
 
@@ -56,6 +57,11 @@ import { CaseDetailComponent } from './admin/case-detail/case-detail.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
+import { UsersComponent } from './admin/users/users.component';
+import { SignoutComponent } from './admin/signout/signout.component';
+
+
+
 
 @NgModule({
   declarations: [
@@ -63,11 +69,15 @@ import { library } from '@fortawesome/fontawesome-svg-core';
     LoginComponent,
     MainComponent,
     DashboardComponent,
-    CaseDetailComponent
+    CaseDetailComponent,
+    UsersComponent,
+    SignoutComponent
   ],
   imports: [
     BrowserModule,
+    
     AngularFireModule.initializeApp(environment.firebase),
+    
     FontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
@@ -76,6 +86,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 
     AngularFirestoreModule,
     AngularFireAuthModule,
+    
     MatAutocompleteModule,
     MatBadgeModule,
     MatBottomSheetModule,

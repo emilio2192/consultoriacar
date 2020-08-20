@@ -1,0 +1,25 @@
+<div class="main">
+    <h1>Usuarios</h1>
+    <h2>Crear Nuevo Usuario:</h2>
+    <mat-form-field appearance="fill" class="input">
+        <mat-label>Ingrese nombre:</mat-label>
+        <input matInput placeholder="Manuel Salvador" [(ngModel)]="name" required>
+        <mat-icon matSuffix>user</mat-icon>
+        <!-- <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error> -->
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="input">
+        <mat-label>Enter your email</mat-label>
+        <input matInput placeholder="pat@example.com" [(ngModel)]="email" required>
+        <mat-icon matSuffix>email</mat-icon>
+        <!-- <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error> -->
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="frmContainer">
+        <mat-label>Enter your password</mat-label>
+        <input matInput [(ngModel)]="password" [type]="hide ? 'password' : 'text'">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+    </mat-form-field>
+    
+    <button mat-stroked-button color="primary" class="submit" (click)="createUser()" >Crear</button>
+</div>

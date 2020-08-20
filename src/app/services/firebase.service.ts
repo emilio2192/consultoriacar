@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
+import * as admin from 'firebase-admin';
+
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +27,18 @@ export class FirebaseService {
       return e;
     }
   }
+  getCollection = () => {
+    return this.afs;
+  }
+
+  getAuth = () => {
+    return this.fAuth;
+  }
+
+  listedUsers = async () =>{
+    // this.fAuth.
+  }
+
+
 }
 

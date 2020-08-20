@@ -13,17 +13,17 @@
 
             <mat-form-field appearance="fill" class="select-client">
                 <mat-label>Cliente</mat-label>
-                <mat-select>
-                    <mat-option value="1232432">Luis Reyes</mat-option>
-                    <mat-option value="1232432">Juan Reyes</mat-option>
+                <mat-select [(ngModel)]="asignedClient">
+                    <mat-option *ngFor="let user of users | async" value="{{user.uid}}">{{user.name}}</mat-option>
+                    <!-- <mat-option value="1232432">Juan Reyes</mat-option> -->
                 </mat-select>
             </mat-form-field>
             <div class="add-case-action">
-                <button mat-stroked-button color="primary">CREAR</button>
+                <button mat-stroked-button color="primary" (click)="createNewCase()">CREAR</button>
             </div>
         </div>
 
-    </div>
+    </div> 
 
     <div class="search-container">
         <mat-form-field appearance="fill" class="search-input">
