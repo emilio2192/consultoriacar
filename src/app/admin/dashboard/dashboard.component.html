@@ -1,4 +1,5 @@
 <div class="dashboard">
+    <h1>ConsultoriaCar.com</h1>
     <div class="add-case">
         <button mat-stroked-button color="primary" (click)="toggleNewCase()">CREAR NUEVO</button>
     </div>
@@ -14,7 +15,7 @@
             <mat-form-field appearance="fill" class="select-client">
                 <mat-label>Cliente</mat-label>
                 <mat-select [(ngModel)]="asignedClient">
-                    <mat-option *ngFor="let user of users | async" value="{{user.uid}}">{{user.name}}</mat-option>
+                    <mat-option *ngFor="let user of users | async"  value="{{user.uid}}">{{user.name}}</mat-option>
                     <!-- <mat-option value="1232432">Juan Reyes</mat-option> -->
                 </mat-select>
             </mat-form-field>
@@ -36,27 +37,27 @@
         <table mat-table [dataSource]="dataSource" class="table">
 
             <!-- Position Column -->
-            <ng-container matColumnDef="position">
+            <ng-container matColumnDef="correlative">
               <th mat-header-cell *matHeaderCellDef> No. </th>
-              <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+              <td mat-cell *matCellDef="let element"> {{element.correlative}} </td>
             </ng-container>
           
             <!-- Name Column -->
-            <ng-container matColumnDef="name">
+            <ng-container matColumnDef="client">
               <th mat-header-cell *matHeaderCellDef> Name </th>
-              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+              <td mat-cell *matCellDef="let element"> {{element.client}} </td>
             </ng-container>
           
             <!-- Weight Column -->
-            <ng-container matColumnDef="weight">
+            <ng-container matColumnDef="status">
               <th mat-header-cell *matHeaderCellDef> Weight </th>
-              <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+              <td mat-cell *matCellDef="let element"> {{element.isFinish? "Completada" : "Incompleta"}} </td>
             </ng-container>
           
             <!-- Symbol Column -->
-            <ng-container matColumnDef="symbol">
+            <ng-container matColumnDef="details">
               <th mat-header-cell *matHeaderCellDef> Symbol </th>
-              <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+              <td mat-cell *matCellDef="let element"> hola</td>
             </ng-container>
           
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -64,7 +65,7 @@
           
             <!-- Row shown when there is no matching data. -->
             <tr class="mat-row" *matNoDataRow>
-              <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+              <td class="mat-cell" colspan="4">No data matching the filter </td>
             </tr>
           </table>
           <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>

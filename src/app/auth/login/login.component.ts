@@ -12,8 +12,9 @@ import { first } from 'rxjs/operators';
 })
 export class LoginComponent implements OnInit {
   // email = new FormControl('', [Validators.required, Validators.email]);
-  email: string = 'lreyes@guatemalagps.com';
+  email: string = 'lerp2192@gmail.com';
   password: string = 'miloreyes';
+  // EJg3C1qy8yRFaCICUjrsta3eDtG3
   hide = true;
   loginRequest: any;
 
@@ -28,12 +29,19 @@ export class LoginComponent implements OnInit {
   login = async () => {
     console.log(window.localStorage.getItem("auth"));
     if (window.localStorage.getItem("auth") != null) {
-      // window.location.href = `//${window.location.host}/main/dashboard`;
       this.router.navigate(['main/dashboard']);
-      return;
     } else {
       const response = await this.firebase.login(this.email, this.password);
       if (!response.code) {
+        console.log(response.user.uid);
+        const collectionUsers = this.firebase.getCollection().collection('users', ref => ref.where('uid', '==',response.user.uid))
+        .valueChanges().subscribe(res=>{
+          console.log(res);
+          // @ts-ignore
+          window.localStorage.setItem("isAdmin", res[0].admin);
+        },error=>{});
+
+
         window.localStorage.setItem("auth", JSON.stringify(response));
         this.loginRequest = response.message;
         console.log('INGRESASTE', response)

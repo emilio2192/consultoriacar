@@ -11,6 +11,7 @@ export class UsersComponent implements OnInit {
   password:string;
   name: string;
   hide=false;
+  isAdmin='client';
   constructor(private firebaseService: FirebaseService) { }
 
   ngOnInit(): void {
@@ -26,8 +27,9 @@ export class UsersComponent implements OnInit {
           uid: result.user.uid,
           name: this.name,
           email: result.user.email,
+          admin: (this.isAdmin=='admin')
         });
-        this.ngOnInit();
+        window.location.reload();
       }).catch(error =>{});
     }
     // console.log(this.firebaseService.createUser(this.email, this.password)); 
