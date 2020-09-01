@@ -1,4 +1,6 @@
+
 import { enableProdMode } from '@angular/core';
+import 'regenerator-runtime/runtime';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';

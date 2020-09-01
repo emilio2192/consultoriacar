@@ -61,6 +61,7 @@ import { UsersComponent } from './admin/users/users.component';
 import { SignoutComponent } from './admin/signout/signout.component';
 
 
+import { MaterialFileInputModule } from 'ngx-material-file-input';
 
 
 @NgModule({
@@ -121,7 +122,8 @@ import { SignoutComponent } from './admin/signout/signout.component';
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    MatTreeModule
+    MatTreeModule,
+    MaterialFileInputModule
 
 
   ],

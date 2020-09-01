@@ -13,7 +13,7 @@ const routes: Routes = [
   {path:'main', component: MainComponent, children:[
     {path:'dashboard', component: DashboardComponent},
     {path:'users', component: UsersComponent},
-    {path:'detail', component: CaseDetailComponent},
+    {path:'detail/:correlative', component: CaseDetailComponent},
     {path:'signout', component: SignoutComponent }
   ]}
 ];
