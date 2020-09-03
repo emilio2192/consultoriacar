@@ -19,20 +19,22 @@ export class UsersComponent implements OnInit {
 
   createUser = () =>{
     if(this.email.length > 0 && this.password.length>0){
-      
       this.firebaseService.getAuth().createUserWithEmailAndPassword(this.email, this.password).then(result =>{
         console.log(result.user.uid);
-        // this.firebaseService.getAuth().sendPasswordResetEmail(result.user.email);
         this.firebaseService.getCollection().collection('users').add({
           uid: result.user.uid,
           name: this.name,
           email: result.user.email,
           admin: (this.isAdmin=='admin')
+        }).then(res=>{
+          console.log(res);
+          this.name = "";
+          this.email = "";
+          this.password = "";
         });
-        window.location.reload();
+        // window.location.reload();
       }).catch(error =>{});
     }
-    // console.log(this.firebaseService.createUser(this.email, this.password)); 
   }
 
 }

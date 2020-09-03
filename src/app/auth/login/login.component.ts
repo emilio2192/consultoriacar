@@ -20,27 +20,21 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   login = async () => {
-    console.log(window.localStorage.getItem("auth"));
     if (window.localStorage.getItem("auth") != null) {
       this.router.navigate(['main/dashboard']);
     } else {
       const response = await this.firebase.login(this.email, this.password);
-      console.log('response   -- ', response);
       if (!response.code) {
-        console.log(response.user.uid);
         const collectionUsers = this.firebase.getCollection().collection('users', ref => ref.where('uid', '==',response.user.uid))
         .valueChanges().subscribe(res=>{
-          console.log('response',res);
           // @ts-ignore
           window.localStorage.setItem("isAdmin", res[0].admin);
         },error=>{
-          console.log('error ',error);
           alert(error);
         });
 
         window.localStorage.setItem("auth", JSON.stringify(response));
         this.loginRequest = response.message;
-        console.log('INGRESASTE', response)
         this.router.navigate(['main/dashboard']);
       }else{
         if(response.code == 'auth/wrong-password'){

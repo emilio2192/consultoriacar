@@ -35,11 +35,9 @@ export class DashboardComponent implements OnInit {
     );
     this.isAdmin = (window.localStorage.getItem('isAdmin') == 'false') ? false : true;
     if (!this.isAdmin) {
-      console.log('hola mundo', this.authUser.user);
       this.firebaseService.getCollection().collection('cases', ref => ref.where('client', '==', this.authUser.user.uid))
         .valueChanges().subscribe(data => {
           data.map(row => {
-            console.log(row);
             // @ts-ignore
             row['clientName'] = this.authUser.user.email;
             this.cases.push(row);

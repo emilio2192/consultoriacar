@@ -47,7 +47,6 @@ export class CaseDetailComponent implements OnInit {
             .subscribe(caseItem => {
 
               caseItem.map(caseElement => {
-                console.log('hoasklsdal', caseElement);
                 this.caseCollection = caseElement;
 
               })
@@ -56,10 +55,7 @@ export class CaseDetailComponent implements OnInit {
       });
     const id = await this.firebaseService.getCollection().collection('cases', ref => ref.where('correlative', '==', this.case)).get().toPromise();
     this.documentId = id.docs[0].id;
-    console.log('call');
     await this.getDocuments();
-    console.log('response');
-    console.log(this.caseCollection);
   }
   createItem(data): FormGroup {
     return this._fb.group(data);
@@ -91,8 +87,6 @@ export class CaseDetailComponent implements OnInit {
       });
       this.firebaseService.getCollection().collection('cases').doc(this.documentId).update(this.caseCollection);
       this.form.get("inputFile").patchValue("");
-      // window.location.reload();
-      // location.reload();
     }
 
   }
