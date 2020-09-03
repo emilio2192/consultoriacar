@@ -1,0 +1,26 @@
+<div class="mainContainer">
+    <mat-grid-list cols="3" rowHeight="1:1">
+        <mat-grid-tile></mat-grid-tile>
+        <mat-grid-tile>
+            <mat-grid-list cols="1" rowHeight="1:1">
+                <div>
+                    <a href="/">Regresar</a>
+                </div>
+                <mat-form-field appearance="fill" class="frmContainer">
+                    <mat-label>Enter your email</mat-label>
+                    <input matInput placeholder="pat@example.com" [(ngModel)]="email" required>
+                    <mat-icon matSuffix>email</mat-icon>
+                    <!-- <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error> -->
+                </mat-form-field>
+
+                <div class="frmContainer">
+                    <button mat-stroked-button color="primary" (click)="sendResetPassword()">RESTABLECER</button><br>
+
+                </div>
+
+            </mat-grid-list>
+
+        </mat-grid-tile>
+        <mat-grid-tile></mat-grid-tile>
+    </mat-grid-list>
+</div>

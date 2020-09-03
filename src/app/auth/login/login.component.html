@@ -3,7 +3,7 @@
         <mat-grid-tile></mat-grid-tile>
         <mat-grid-tile >
             <mat-grid-list cols="1" rowHeight="1:1">
-                
+                    <h1>ConsultoriaCar.com</h1>
                     <mat-form-field appearance="fill" class="frmContainer">
                         <mat-label>Enter your email</mat-label>
                         <input matInput placeholder="pat@example.com" [(ngModel)]="email" required>
@@ -23,7 +23,8 @@
                     
 
                     <div class="frmContainer">
-                        <button mat-stroked-button color="primary" (click)="login()">INGRESAR</button>
+                        <button mat-stroked-button color="primary" (click)="login()">INGRESAR</button><br>
+                        <button mat-stroked-button color="primary" style="clear:both;margin-top:10px;width:auto" (click)="forgot()">OLVIDASTE TU CONTRASEÑA</button>
                     </div>
                 
             </mat-grid-list>

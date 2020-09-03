@@ -7,7 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
   showFiller = false;
-  constructor() { }
+  isAdmin = false;
+  constructor() { 
+    this.isAdmin = (window.localStorage.getItem('isAdmin') == 'false') ? false : true;
+    console.log('role', this.isAdmin);
+  }
 
   ngOnInit(): void {
   }

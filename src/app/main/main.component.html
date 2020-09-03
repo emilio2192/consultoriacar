@@ -3,8 +3,8 @@
         <mat-list>
           <mat-list-item><h1>consultoriacar.com</h1></mat-list-item>
             <mat-list-item><a href="/main/dashboard" class="item">Principal</a></mat-list-item>
-            <mat-divider></mat-divider>
-            <mat-list-item><a href="/main/users" class="item">Usuarios</a></mat-list-item>
+            <mat-divider *ngIf="isAdmin"></mat-divider>
+            <mat-list-item *ngIf="isAdmin"><a href="/main/users" class="item">Usuarios</a></mat-list-item>
             <mat-divider></mat-divider>
             <mat-list-item><a href="/main/signout" class="item">Salir</a></mat-list-item>
           </mat-list>

@@ -1,6 +1,6 @@
 <div class="dashboard">
     <h1>ConsultoriaCar.com</h1>
-    <div class="add-case">
+    <div class="add-case" *ngIf="isAdmin" >
         <button mat-stroked-button color="primary" (click)="toggleNewCase()">CREAR NUEVO</button>
     </div>
     <div class="add-case-container" *ngIf="newCaseShow">
@@ -8,7 +8,7 @@
         <div class="add-case-content">
             <mat-form-field appearance="fill" class="number-case">
                 <mat-label>Agregar correlativo</mat-label>
-                <input matInput placeholder="12345667889" [(ngModel)]="newCorrelative" required>
+                <input matInput placeholder="12345667889" (keyup)="applyFilter($event)" [(ngModel)]="newCorrelative" required>
                 <!-- <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error> -->
             </mat-form-field>
 

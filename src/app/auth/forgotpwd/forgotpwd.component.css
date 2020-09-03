@@ -1,0 +1,24 @@
+.bg{
+    background-color: aquamarine;
+    margin-top: 25%;
+    float: left;
+}
+.bg2{
+    background-color: blue;
+}
+.mainContainer{
+    float: left;
+    height: 100%;
+    width: 100%;
+    padding-top:10%;
+}
+
+.frmContainer{
+    float: left;
+    width: 100%;
+    
+}
+.frmContainer > button{
+    float:right;
+    width: 200px;
+}

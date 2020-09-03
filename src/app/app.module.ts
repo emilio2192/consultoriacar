@@ -62,6 +62,7 @@ import { SignoutComponent } from './admin/signout/signout.component';
 
 
 import { MaterialFileInputModule } from 'ngx-material-file-input';
+import { ForgotpwdComponent } from './auth/forgotpwd/forgotpwd.component';
 
 
 @NgModule({
@@ -72,7 +73,8 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
     DashboardComponent,
     CaseDetailComponent,
     UsersComponent,
-    SignoutComponent
+    SignoutComponent,
+    ForgotpwdComponent
   ],
   imports: [
     BrowserModule,

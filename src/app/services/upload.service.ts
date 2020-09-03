@@ -18,7 +18,6 @@ export class UploadService {
                 accessKeyId: environment.amazon.accessKey,
                 secretAccessKey: environment.amazon.secretKey,
                 region: 'us-east-2',
-
             }
         );
         const filename = `${correlative}-${this.randomString()}`;
@@ -26,21 +25,9 @@ export class UploadService {
             Bucket: 'consultoriacar',
             Key: filename,
             Body: file,
-            ACL: 'public-read',
             ContentType: contentType
         };
-        let response;
         return await bucket.upload(params).promise();
-        // , function (err, data) {
-        //     if (err) {
-        //         console.log('EROOR: ', JSON.stringify(err));
-        //         return Promise.reject(false);
-        //     }
-        //     console.log('File Uploaded.', data);
-        //     response = data;
-        //     Promise.resolve(data);
-        // });
-        // return response;
     }
     randomString = () => {
         let text = '';

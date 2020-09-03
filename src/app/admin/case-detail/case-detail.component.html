@@ -1,22 +1,26 @@
-<div class="main">
+<div class="main" *ngIf="caseCollection">
     <h1>Numero de correlativo: {{this.case}}</h1>
-    <div class="main-uploader">
+    <h2>Estado del correlativo: {{this.caseCollection.isFinish? 'Cerrado' : 'Abierto'}}</h2>
+    <div class="main-uploader" *ngIf="!this.caseCollection.isFinish">
         <form [formGroup]="form">
             <mat-form-field appearance="standard" class="uploadFile">
                 <mat-label>Click para subir archivos</mat-label>
-                <ngx-mat-file-input #inputFile name="item"  (change)="handleFileInput($event)" placeholder="Click para subir archivos"></ngx-mat-file-input>
+                <ngx-mat-file-input #inputFile formControlName="inputFile" name="item"  (change)="handleFileInput($event)" placeholder="Click para subir archivos"></ngx-mat-file-input>
                 <mat-icon matSuffix>folder</mat-icon>
             </mat-form-field>
             <div class="btn-submit">
                 <button mat-stroked-button color="primary" (click)="upload()">SUBIR</button>
             </div>
-
         </form>
+    </div>
+    <div class="main-uploader" *ngIf="!this.caseCollection.isFinish && this.isAdmin" style="text-align: right;">
+      <button mat-stroked-button color="primary" (click)="reOpenCase()" style="width: 35%;" >REAPERTURAR CORRELATIVO</button>
+
     </div>
     <br>
     <div class="main-uploader">
-        <div class="btn-submit">
-            <button mat-stroked-button color="primary" >FINALIZAR CORRELATIVO</button>
+        <div class="btn-submit" *ngIf="!this.caseCollection.isFinish">
+            <button mat-stroked-button color="primary" (click)="finishCase()" >FINALIZAR CORRELATIVO</button>
         </div>
         <h3>Documentos</h3>
     </div>
@@ -45,5 +49,5 @@
           <td class="mat-cell" colspan="4">No data matching the filter </td>
         </tr>
       </table>
-      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
 </div>
