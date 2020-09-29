@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, FormControl, FormArray } from '@angular/forms';
 import { UploadService } from '../../services/upload.service';
 import { FirebaseService } from '../../services/firebase.service';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
+import { EmailService } from '../../services/email.service';
 
 
 @Component({
@@ -29,7 +29,9 @@ export class CaseDetailComponent implements OnInit {
 
   displayedColumns: string[] = ['filename', 'link'];
   dataSource = new MatTableDataSource();
-  constructor(private router: Router, private firebaseService: FirebaseService, private route: ActivatedRoute, private _fb: FormBuilder, private uploadService: UploadService) {
+  constructor(private router: Router, private firebaseService: FirebaseService, 
+    private route: ActivatedRoute, private _fb: FormBuilder, 
+    private uploadService: UploadService, private emailService: EmailService) {
     this.case = this.route.snapshot.paramMap.get('correlative');
     this.form = this._fb.group({
       inputFile: [""],
@@ -38,7 +40,9 @@ export class CaseDetailComponent implements OnInit {
   }
 
   async ngOnInit() {
+    console.log('holaaaa'); 
     this.isAdmin = (window.localStorage.getItem('isAdmin') == 'false') ? false : true;
+    console.log(`is admin??? ${this.isAdmin}`);
     await this.firebaseService.getCollection().collection('cases')
       .valueChanges().subscribe(data => {
         data.map(row => {
@@ -48,13 +52,21 @@ export class CaseDetailComponent implements OnInit {
 
               caseItem.map(caseElement => {
                 this.caseCollection = caseElement;
-
               })
             })
         });
       });
     const id = await this.firebaseService.getCollection().collection('cases', ref => ref.where('correlative', '==', this.case)).get().toPromise();
     this.documentId = id.docs[0].id;
+    const user = JSON.parse( await window.localStorage.getItem('auth'));
+    setTimeout(() => {
+      if (this.caseCollection) {
+        console.log('******* ', user.user.uid, this.caseCollection.client);
+        if (!this.isAdmin && user.user.uid !== this.caseCollection.client) {
+          this.router.navigate(['main/dashboard']);
+        }
+      }
+    }, 2000);
     await this.getDocuments();
   }
   createItem(data): FormGroup {
@@ -93,15 +105,17 @@ export class CaseDetailComponent implements OnInit {
 
   getDocuments = async () => {
     this.firebaseService.getCollection().collection('cases', ref => ref.where('correlative', '==', this.case)).valueChanges().subscribe(data => {
-      data.map(item =>{
+      data.map(item => {
         this.dataSource = new MatTableDataSource();
         // @ts-ignore
         this.dataSource.data = item.files;
       })
-    }); 
+    });
   }
 
   finishCase = () => {
+    console.log('------');
+    this.emailService.sendEmail();
     this.caseCollection.isFinish = true;
     this.firebaseService.getCollection().collection('cases').doc(this.documentId).update(this.caseCollection);
   }

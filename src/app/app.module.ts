@@ -63,6 +63,10 @@ import { SignoutComponent } from './admin/signout/signout.component';
 
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { ForgotpwdComponent } from './auth/forgotpwd/forgotpwd.component';
+import { EmailService } from './services/email.service';
+
+import { HttpClientModule } from '@angular/common/http';
+import { CorrelativeComponent } from './admin/correlative/correlative.component';
 
 
 @NgModule({
@@ -74,7 +78,8 @@ import { ForgotpwdComponent } from './auth/forgotpwd/forgotpwd.component';
     CaseDetailComponent,
     UsersComponent,
     SignoutComponent,
-    ForgotpwdComponent
+    ForgotpwdComponent,
+    CorrelativeComponent
   ],
   imports: [
     BrowserModule,
@@ -125,11 +130,10 @@ import { ForgotpwdComponent } from './auth/forgotpwd/forgotpwd.component';
     MatToolbarModule,
     MatTooltipModule,
     MatTreeModule,
-    MaterialFileInputModule
-
-
+    MaterialFileInputModule,
+    HttpClientModule
   ],
-  providers: [FirebaseService],
+  providers: [FirebaseService, EmailService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

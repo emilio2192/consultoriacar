@@ -46,3 +46,8 @@
       font-size: 18px;
       font-family: monospace;
   }
+
+  .logo{
+    max-width: 190px;
+    margin: 0 auto;
+  }

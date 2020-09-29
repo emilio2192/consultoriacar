@@ -13,6 +13,7 @@ export class SignoutComponent implements OnInit {
 
   ngOnInit(): void {
     this.firebaseService.logout();
+    window.localStorage.removeItem('isAdmin');
     window.localStorage.clear();
     this.router.navigate(['login']);
     

@@ -1,0 +1,9 @@
+<h1>Correlativo Anual</h1>
+<div class="container">
+    <mat-form-field appearance="fill" class="correlative">
+        <mat-label>Correlativo</mat-label>
+        <input matInput placeholder="12345667889" [(ngModel)]="numberCorrelative" required>
+    </mat-form-field>
+    <br>
+    <button mat-stroked-button color="primary" (click)="update()" >Actualizar</button>
+</div>

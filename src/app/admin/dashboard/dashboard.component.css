@@ -24,7 +24,8 @@
 }
 .number-case{
     float: left;
-    width: 33%;
+    width: 32%;
+    margin-right:10px;
 }
 .select-client{
     float: left;
@@ -33,10 +34,10 @@
 }
 
 .add-case-action{
-    float: left;
+    float: right;
     width: 32%;
     margin-left: 10px;
-    
+    text-align:right;
 }
 
 .add-case-action > button{

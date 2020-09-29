@@ -13,7 +13,7 @@
             </div>
         </form>
     </div>
-    <div class="main-uploader" *ngIf="!this.caseCollection.isFinish && this.isAdmin" style="text-align: right;">
+    <div class="main-uploader" *ngIf="this.caseCollection.isFinish && this.isAdmin" style="text-align: right;">
       <button mat-stroked-button color="primary" (click)="reOpenCase()" style="width: 35%;" >REAPERTURAR CORRELATIVO</button>
 
     </div>

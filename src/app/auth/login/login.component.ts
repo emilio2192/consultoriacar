@@ -28,20 +28,30 @@ export class LoginComponent implements OnInit {
         const collectionUsers = this.firebase.getCollection().collection('users', ref => ref.where('uid', '==',response.user.uid))
         .valueChanges().subscribe(res=>{
           // @ts-ignore
+          console.log("=======+> ADMIN ",res[0].admin);
+          // @ts-ignore
           window.localStorage.setItem("isAdmin", res[0].admin);
         },error=>{
           alert(error);
         });
 
+        // const collectionUsersPromise = await this.firebase.getCollection().collection('users', ref => ref.where('uid', '==',response.user.uid)).valueChanges().toPromise();
+        // console.log("PROMISE ",collectionUsersPromise);
+
+
         window.localStorage.setItem("auth", JSON.stringify(response));
         this.loginRequest = response.message;
-        this.router.navigate(['main/dashboard']);
+        setTimeout(()=>this.router.navigate(['main/dashboard']), 1000);
+        
       }else{
         if(response.code == 'auth/wrong-password'){
           alert('Credenciales Invalidas, ingrese correctamente.')
         }
         if(response.code == 'auth/user-not-found'){
           alert('El usuario no existe')
+        }
+        if(response.code){
+          alert(response.code);
         }
       }
     }
