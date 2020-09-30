@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
+import * as AWS from 'aws-sdk/global';
+import * as SES from 'aws-sdk/clients/ses';
+import { environment } from '../../environments/environment';
 
 
 @Injectable({
@@ -14,31 +17,37 @@ export class EmailService {
 
   }
 
-  sendEmail = async () => {
-    console.log('holaaaa')
-    const data = {
-      from: 'Consultoria Car <consultoriacar.gt@gmail.com>',
-      to: 'lerp2192@gmail.com',
-      subject: 'Hello',
-      text: 'test'
-    };
-
-    const body = new FormData();
-    body.append('from', 'Excited User <consultoriacar.gt@gmail.com>');
-    body.append('to', 'lerp2192@gmail.com');
-    body.append('subject', 'Hello');
-    body.append('text', 'test send email');
-
-    // @ts-ignore
-    // const grouped = Array.from(body).reduce( (m, e) => ((([g, k, v] = [...e[0].split(':'), e[1]]) =>(m[g] = Object.assign({}, m[g]))[k] = v)(), m) , {});
-    // body.set('from=consultoriacar.gt@gmail.com; to=lerp2192@gmail.com; subject=Hello; text=hola es un test;')
+  sendEmail = async (correlative:string) => {
+    // AWS.config.update({region: AWS.config.region});
+    const ses = new SES( {
+      accessKeyId: environment.amazon.accessKey,
+      secretAccessKey: environment.amazon.secretKey,
+      region: 'us-east-2',
+  });
+    const params = {
+      Destination: {
     
-    const headers = new HttpHeaders({
-      'Authorization': "Basic YXBpOjQzNzU5MGI0OTgzYWYyYTNjMmQwZDllZDQ1YmYzOTYzLTBmNDcyNzk1LTI1MjVlM2Vi",
-      
-      'token': 'YXBpOjQzNzU5MGI0OTgzYWYyYTNjMmQwZDllZDQ1YmYzOTYzLTBmNDcyNzk1LTI1MjVlM2Vi'
-    });
-    const response = await this.http.post('https://api.mailgun.net/v3/sandbox12d6e9d16d014230aacd5af7310b5dd9.mailgun.org/messages', body, { headers }).toPromise();
-    console.log('respuesta ', response);
+       ToAddresses: [
+          "consultoriacar.gt@gmail.com"
+       ]
+      }, 
+      Message: {
+       Body: {
+        Html: {
+         Charset: "UTF-8", 
+         Data: `Se ha finalizado el correlativo: ${correlative}. Puedes ver el detalle <a href='consultoriacar.com/main/detail/${correlative}' >aqui </a>. `
+        }
+       }, 
+       Subject: {
+        Charset: "UTF-8", 
+        Data: "Correlativo finalizado"
+       }
+      },
+      Source: "Consultoria car <consultoriacar.gt@gmail.com>", 
+     };
+    ses.sendEmail(params, (err, data) => {
+      if(err) console.log(err);
+      if(data) console.log(data);
+    })
   }
 }

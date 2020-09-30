@@ -115,7 +115,7 @@ export class CaseDetailComponent implements OnInit {
 
   finishCase = () => {
     console.log('------');
-    this.emailService.sendEmail();
+    this.emailService.sendEmail(this.case);
     this.caseCollection.isFinish = true;
     this.firebaseService.getCollection().collection('cases').doc(this.documentId).update(this.caseCollection);
   }

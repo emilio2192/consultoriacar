@@ -53,7 +53,7 @@ export class DashboardComponent implements OnInit {
     console.log(`correlative actual`, this.correlative);
     this.isAdmin = (window.localStorage.getItem('isAdmin') == 'false') ? false : true;
     if (!this.isAdmin) {
-      this.firebaseService.getCollection().collection('cases', ref => ref.where('client', '==', this.authUser.user.uid))
+      this.firebaseService.getCollection().collection('cases', ref => ref.where('client', '==', this.authUser.user.uid).orderBy('correlative') )
         .valueChanges().subscribe(data => {
           data.map(row => {
             // @ts-ignore
@@ -63,9 +63,10 @@ export class DashboardComponent implements OnInit {
           this.dataSource.data = data;
         });
     } else {
-      this.firebaseService.getCollection().collection('cases')
+      this.firebaseService.getCollection().collection('cases', ref => ref.orderBy('correlative'))
         .valueChanges().subscribe(data => {
           data.map(row => {
+            
             // @ts-ignore
             this.firebaseService.getCollection().collection('users', ref => ref.where('uid', '==', row.client)).valueChanges().subscribe(clients => {
               clients.map(client => {
