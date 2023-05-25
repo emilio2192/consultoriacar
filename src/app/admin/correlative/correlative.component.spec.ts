@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { CorrelativeComponent } from './correlative.component';
 
@@ -6,7 +6,7 @@ describe('CorrelativeComponent', () => {
   let component: CorrelativeComponent;
   let fixture: ComponentFixture<CorrelativeComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ CorrelativeComponent ]
     })

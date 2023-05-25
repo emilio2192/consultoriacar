@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { InjectionToken, NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -67,6 +67,10 @@ import { EmailService } from './services/email.service';
 
 import { HttpClientModule } from '@angular/common/http';
 import { CorrelativeComponent } from './admin/correlative/correlative.component';
+import { StoreModule } from '@ngrx/store';
+import { reducers } from './store/reducers';
+
+export const ROOT_REDUCER = new InjectionToken<any>('Root Reducer', {factory: () => reducers});
 
 
 @NgModule({
@@ -83,18 +87,15 @@ import { CorrelativeComponent } from './admin/correlative/correlative.component'
   ],
   imports: [
     BrowserModule,
-    
+    StoreModule.forRoot(ROOT_REDUCER),
     AngularFireModule.initializeApp(environment.firebase),
-    
     FontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-
     AngularFirestoreModule,
     AngularFireAuthModule,
-    
     MatAutocompleteModule,
     MatBadgeModule,
     MatBottomSheetModule,
@@ -131,9 +132,13 @@ import { CorrelativeComponent } from './admin/correlative/correlative.component'
     MatTooltipModule,
     MatTreeModule,
     MaterialFileInputModule,
-    HttpClientModule
+    HttpClientModule,
+    
   ],
-  providers: [FirebaseService, EmailService],
+  providers: [
+    FirebaseService, 
+    EmailService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
